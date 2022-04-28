@@ -1,7 +1,8 @@
 import moment from "moment";
 
 const DetailCard = ({ weatherIcon, data }) => {
-  const { clouds, main, weather } = data.list[0];
+  const { city } = data;
+  const { clouds, main, weather, wind } = data.list[0];
 
   return (
     <div className="container p-4 flex items-center justify-center shadow-lg rounded-lg bg-white h-1/3 mb-auto">
@@ -19,16 +20,18 @@ const DetailCard = ({ weatherIcon, data }) => {
         <p className="tracking-widest">{moment().format("dddd MMM YYYY")}</p>
       </div>
       <div className="my-2 border-1-2 border-gray-100 p-2">
-        <p className="text-gray-400 text-lg">
-          ReelFeel: {Math.round(main.feels_like)} &deg;C
+        <p className="text-gray-400 text-md mb-1">Wind Speed: {wind.speed}</p>
+        <p className="text-gray-400 text-md mb-1">
+          Humidity: {main.humidity} %
         </p>
-        <p className="text-gray-400 text-lg">Humidity: {main.humidity} %</p>
-        <p className="text-gray-400 text-lg">Cloud Cover: {clouds.all} %</p>
-        <p className="text-gray-400 text-lg">
-          Min Temp: {Math.round(main.temp_min)} &deg;C
+        <p className="text-gray-400 text-md mb-1">
+          Cloud Cover: {clouds.all} %
         </p>
-        <p className="text-gray-400 text-lg">
-          Max Temp: {Math.round(main.temp_max)} &deg;C
+        <p className="text-gray-400 text-md mb-1">
+          Sunrise: {new Date(city.sunrise * 1000).toLocaleTimeString("en-IN")}
+        </p>
+        <p className="text-gray-400 text-md">
+          Sunset: {new Date(city.sunset * 1000).toLocaleTimeString("en-IN")}
         </p>
       </div>
     </div>
