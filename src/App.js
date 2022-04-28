@@ -1,3 +1,17 @@
+// Kunna se följande väderförhållanden för sin nuvarande position:
+// Temperatur
+// Vindstyrka
+// Luftfuktighet
+// Soluppgång och nedgång (klockslag)
+// Välja mellan Fahrenheit och Celsius
+// Kunna få en väderleksprognos för väderförhållanden (enligt ovan) med:
+// Kort översikt av vädret (e.g. ha med temperatur och någon mer information) för 5 dagar framåt
+// Information för resten av dagen (med data för varje eller var tredje timme) för nuvarande dygn (e.g. ha med temperatur, nuvarande väder, vindstyrka och luftfuktighet).
+// Du får gärna ha med någon annan intressant information om du vill.
+// Nyttja ett väder-API, t.ex. SMHI, YR.NO, OpenWeatherMaps (exempel kommer ges med OpenWeatherMap)
+// Nyttja positionering via geolocation i webbläsaren
+// Design/färg & form baserad på https://weather.com/weather/today/ (Länkar till en externa sida.) eller liknande applikationer/appar (lättförståelig och lättöverblickad)
+
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
@@ -11,10 +25,41 @@ function App() {
   const [city, setCity] = useState("Unknown city");
   const [searchTerm, setSearchTerm] = useState("");
   const [weatherData, setWeatherData] = useState([]);
-  const [noData, setNoData] = useState("No Search");
+  const [error, setError] = useState("");
   const [weatherIcon, setWeatherIcon] = useState(
-    `${process.env.REACT_APP_WEATHER_ICON}10@2x.png`
+    `${process.env.REACT_APP_WEATHER_ICON_URL}10@2x.png`
   );
+
+  const getWeather = async (location) => {
+    setWeatherData([]);
+
+    const cityOrGeo =
+      typeof location === "string"
+        ? `q=${location}`
+        : `lat=${location[0]}&lon=${location[1]}`;
+
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_WEATHER_URL}${cityOrGeo}&appid=${apiKey}&units=metric`
+      );
+
+      const data = await res.json();
+      if (data.cod !== "200") {
+        setError("No Location Found.");
+        return;
+      }
+      console.log(data);
+      setError("");
+      setWeatherData(data);
+      setCity(`${data.city.name}, ${data.city.country}`);
+      setWeatherIcon(
+        `${process.env.REACT_APP_WEATHER_ICON_URL}${data.list[0].weather[0]["icon"]}@4x.png`
+      );
+    } catch (error) {
+      console.log("Error:" + error);
+      setError("Something went wrong, try again.");
+    }
+  };
 
   const handleChange = (input) => {
     const { value } = input.target;
@@ -26,48 +71,13 @@ function App() {
     getWeather(searchTerm);
   };
 
-  const getWeather = async (location) => {
-    setWeatherData([]);
-
-    let cityOrGeo =
-      typeof location === "string"
-        ? `q=${location}`
-        : `lat=${location[0]}&lon=${location[1]}`;
-
-    try {
-      let res = await fetch(
-        `${
-          process.env.REACT_APP_WEATHER_URL + cityOrGeo
-        }&appid=${apiKey}&units=metric&cnt=6&exclude=hourly,minutely`
-      );
-
-      let data = await res.json();
-
-      if (data.cod != 200) {
-        setNoData("No Location Found.");
-        return;
-      }
-
-      setWeatherData(data);
-      setCity(`${data.city.name}, ${data.city.country}`);
-      setWeatherIcon(
-        `${
-          process.env.REACT_APP_WEATHER_ICON + data.list[0].weather[0]["icon"]
-        }@4x.png`
-      );
-      console.log(data);
-    } catch (error) {
-      console.log("Error:" + error);
-    }
-  };
-
-  const myIP = (location) => {
+  const myLocationOnSuccess = (location) => {
     const { latitude, longitude } = location.coords;
     getWeather([latitude, longitude]);
   };
 
   return (
-    <div className="flex items-center justify-center w-screen h-screen py-10">
+    <div className="flex items-center justify-center h-screen py-10">
       <div className="flex w-3/4 min-h-full rounded-3xl shadow-lg m-auto bg-gray-100">
         {/* FORM SECTION */}
         <div className="form-container">
@@ -109,7 +119,9 @@ function App() {
               <i
                 className="fa fa-map-marker-alt my-auto cursor-pointer p-3 text-white"
                 aria-hidden="true"
-                onClick={() => navigator.geolocation.getCurrentPosition(myIP)}
+                onClick={() =>
+                  navigator.geolocation.getCurrentPosition(myLocationOnSuccess)
+                }
               ></i>
             </form>
           </div>
@@ -121,7 +133,7 @@ function App() {
             {weatherData.length === 0 ? (
               <div className="container p-4 flex items-center justify-center h1/3 mb-auto">
                 <h1 className="text-gray-300 text-4xl font-bold uppercase">
-                  {noData}
+                  {error ? error : "Search something"}
                 </h1>
               </div>
             ) : (
@@ -135,7 +147,7 @@ function App() {
                 <ul className="grid grid-cols-2 gap-2">
                   {weatherData.list.map((days, index) => {
                     if (index > 0) {
-                      return <SummaryCard key={index} day={days} />;
+                      return <SummaryCard key={index} today={days} />;
                     }
                   })}
                 </ul>
