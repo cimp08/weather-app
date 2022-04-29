@@ -15,9 +15,9 @@
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
-import Header from "./components/Header";
 import DetailCard from "./components/DetailCard";
 import SummaryCard from "./components/SummaryCard";
+import FiveDaysCard from "./components/FiveDaysCard";
 
 function App() {
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -127,8 +127,7 @@ function App() {
           </div>
         </div>
         {/* CARD SECTION */}
-        <div className="w-2/4 p-5">
-          <Header />
+        <div className="w-2/4 px-5">
           <div className="flex flex-col my-10">
             {weatherData.length === 0 ? (
               <div className="container p-4 flex items-center justify-center h1/3 mb-auto">
@@ -138,19 +137,14 @@ function App() {
               </div>
             ) : (
               <>
-                <h1 className="text-5xl text-gray-800 mt-auto mb-4">Today</h1>
+                <h1 className="text-5xl text-gray-800 mt-auto mb-4">Now</h1>
                 <DetailCard weatherIcon={weatherIcon} data={weatherData} />
 
-                <h1 className="text-3xl text-gray-600 mb-4 mt-10">
-                  More on {city}
-                </h1>
-                <ul className="grid grid-cols-2 gap-2">
-                  {weatherData.list.map((days, index) => {
-                    if (index > 0) {
-                      return <SummaryCard key={index} today={days} />;
-                    }
-                  })}
-                </ul>
+                <h1 className="text-3xl text-gray-600 mb-4 mt-10">Today</h1>
+                <SummaryCard today={weatherData} />
+
+                <h1 className="text-3xl text-gray-600 mb-4 mt-10">Forecast</h1>
+                <FiveDaysCard forecast={weatherData} />
               </>
             )}
           </div>
