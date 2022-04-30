@@ -1,17 +1,3 @@
-// Kunna se följande väderförhållanden för sin nuvarande position:
-// Temperatur
-// Vindstyrka
-// Luftfuktighet
-// Soluppgång och nedgång (klockslag)
-// Välja mellan Fahrenheit och Celsius
-// Kunna få en väderleksprognos för väderförhållanden (enligt ovan) med:
-// Kort översikt av vädret (e.g. ha med temperatur och någon mer information) för 5 dagar framåt
-// Information för resten av dagen (med data för varje eller var tredje timme) för nuvarande dygn (e.g. ha med temperatur, nuvarande väder, vindstyrka och luftfuktighet).
-// Du får gärna ha med någon annan intressant information om du vill.
-// Nyttja ett väder-API, t.ex. SMHI, YR.NO, OpenWeatherMaps (exempel kommer ges med OpenWeatherMap)
-// Nyttja positionering via geolocation i webbläsaren
-// Design/färg & form baserad på https://weather.com/weather/today/ (Länkar till en externa sida.) eller liknande applikationer/appar (lättförståelig och lättöverblickad)
-
 import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
@@ -26,9 +12,14 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [weatherData, setWeatherData] = useState([]);
   const [error, setError] = useState("");
+  const [convert, setConvert] = useState(true);
   const [weatherIcon, setWeatherIcon] = useState(
     `${process.env.REACT_APP_WEATHER_ICON_URL}10@2x.png`
   );
+
+  const handleConvert = () => {
+    setConvert(!convert);
+  };
 
   const getWeather = async (location) => {
     setWeatherData([]);
@@ -137,14 +128,18 @@ function App() {
               </div>
             ) : (
               <>
-                <h1 className="text-5xl text-gray-800 mt-auto mb-4">Now</h1>
-                <DetailCard weatherIcon={weatherIcon} data={weatherData} />
+                <DetailCard
+                  weatherIcon={weatherIcon}
+                  data={weatherData}
+                  handleConvert={() => handleConvert()}
+                  convert={convert}
+                />
 
                 <h1 className="text-3xl text-gray-600 mb-4 mt-10">Today</h1>
-                <SummaryCard today={weatherData} />
+                <SummaryCard today={weatherData} convert={convert} />
 
                 <h1 className="text-3xl text-gray-600 mb-4 mt-10">Forecast</h1>
-                <FiveDaysCard forecast={weatherData} />
+                <FiveDaysCard forecast={weatherData} convert={convert} />
               </>
             )}
           </div>
