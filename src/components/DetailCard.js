@@ -41,18 +41,24 @@ const DetailCard = ({ weatherIcon, data, handleConvert, convert }) => {
           <p className="tracking-widest">{moment().format("dddd MMM YYYY")}</p>
         </div>
         <div className="my-2 border-1-2 border-gray-100 p-2">
-          <p className="text-gray-400 text-md mb-1">Wind Speed: {wind.speed}</p>
+          <p className="text-gray-400 text-md mb-1">Wind: {wind.speed} m/s</p>
           <p className="text-gray-400 text-md mb-1">
             Humidity: {main.humidity} %
           </p>
+          <p className="text-gray-400 text-md mb-1">Cloud: {clouds.all} %</p>
           <p className="text-gray-400 text-md mb-1">
-            Cloud Cover: {clouds.all} %
-          </p>
-          <p className="text-gray-400 text-md mb-1">
-            Sunrise: {new Date(city.sunrise * 1000).toLocaleTimeString("en-IN")}
+            Sunrise:{" "}
+            {new Date(city.sunrise * 1000).toLocaleTimeString("sv-SE", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </p>
           <p className="text-gray-400 text-md">
-            Sunset: {new Date(city.sunset * 1000).toLocaleTimeString("en-IN")}
+            Sunset:{" "}
+            {new Date(city.sunset * 1000).toLocaleTimeString("sv-SE", {
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
           </p>
         </div>
       </div>
