@@ -27,11 +27,13 @@ const DetailCard = ({ weatherIcon, data, handleConvert, convert }) => {
         </button>
       </div>
 
-      <h1 className="text-5xl text-gray-800 mt-auto mb-4">{city.name}</h1>
-      <div className="container p-4 flex items-center justify-center shadow-lg rounded-lg bg-white h-1/3 mb-auto">
-        <div className="my-auto">
+      <h1 className="city-name text-5xl text-gray-800 mt-auto mb-4">
+        {city.name}
+      </h1>
+      <div className="container p-4 flex flex-col sm:flex-row items-center justify-center shadow-lg rounded-lg bg-white h-1/3 mb-auto">
+        <div className="detailcard my-auto">
           <p className="font-bold text-5xl text-pink-800 mb-2">{unit}</p>
-          <p className="text-4xl text-gray-800 tracking-widest">
+          <p className="main-img text-4xl text-gray-800 tracking-widest">
             {weather[0].main}
             <img className="w-1/4 inline" src={weatherIcon} />
           </p>

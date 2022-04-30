@@ -69,7 +69,7 @@ function App() {
 
   return (
     <div className="flex items-center justify-center h-screen py-10">
-      <div className="flex w-3/4 min-h-full rounded-3xl shadow-lg m-auto bg-gray-100">
+      <div className="flex flex-col lg:flex-row w-3/4 w-4/4 min-h-full rounded-3xl shadow-lg m-auto bg-gray-100">
         {/* FORM SECTION */}
         <div className="form-container">
           <div className="flex items-center justify-center">
@@ -84,7 +84,7 @@ function App() {
             </div>
           </div>
           <div className="flex flex-col items-center justify-center h-full">
-            <h1 className="text-white text-xl uppercase">
+            <h1 className="weatherfy mt-10 lg:mt-0 text-white text-xl uppercase">
               Welcome To Weatherfy
             </h1>
             <hr className="h-0.5 bg-white w-1/4 rounded-full my-5" />
@@ -98,7 +98,7 @@ function App() {
                 placeholder="Enter City"
                 onChange={handleChange}
                 required
-                className="relative rounded-xl py-2 px-3 w-2/3 bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
+                className="search-input relative rounded-xl py-2 px-3 w-2/3 bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
               />
               <button type="submit" className="z-10">
                 <i
@@ -118,7 +118,7 @@ function App() {
           </div>
         </div>
         {/* CARD SECTION */}
-        <div className="w-2/4 px-5">
+        <div className="lg:w-2/4 px-5">
           <div className="flex flex-col my-10">
             {weatherData.length === 0 ? (
               <div className="container p-4 flex items-center justify-center h1/3 mb-auto">
