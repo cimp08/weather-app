@@ -47,10 +47,10 @@ const FiveDaysCard = ({ forecast, convert }) => {
                   className="w-1/4 inline"
                 />
               </p>
-              <p className="text-gray-400 text-xs uppercase tracking-widest">
+              <p className="text-gray-400 text-xs uppercase tracking-widest mb-2">
                 {days.weather[0].description}
               </p>
-              <p className="tracking-wider">{days.dt_txt}</p>
+              <p className="tracking-wider">Date: {days.dt_txt.slice(0, 10)}</p>
             </div>
           </li>
         ))}
