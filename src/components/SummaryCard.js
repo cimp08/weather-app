@@ -42,7 +42,9 @@ const SummaryCard = ({ today, convert }) => {
                 <p className="text-xs tracking-widest mb-4">
                   Humidity: {days.main.humidity}%
                 </p>
-                <p className="tracking-wider">{days.dt_txt}</p>
+                <p className="tracking-wider">
+                  Time: {days.dt_txt.slice(11, 16)}
+                </p>
               </div>
             </li>
           ))}
