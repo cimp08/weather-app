@@ -1,6 +1,6 @@
 import React from "react";
 
-const SummaryCard = ({ today }) => {
+const SummaryCard = ({ today, convert }) => {
   const onlyToday = today.list.filter((item) => {
     const dateTime = new Date(item.dt * 1000);
     const day = dateTime.getDate();
@@ -14,12 +14,14 @@ const SummaryCard = ({ today }) => {
   return (
     <>
       <div class="overflow-x-auto ...">
-        <ul className="grid grid-cols-2 gap-2">
+        <ul className="flex flex-row w-max mb-2">
           {onlyToday.map((days) => (
             <li className="container p-4 flex items-center justify-center bg-gray-200 rounded-lg my-auto mr-1">
               <div className="my-auto">
                 <p className="font-bold text-3x1 text-pink-600 mb-2">
-                  {Math.round(days.main.temp)}&deg;C
+                  {convert
+                    ? `${Math.round(days.main.temp)} °C`
+                    : `${Math.round(days.main.temp * 2 + 30)} °F`}
                 </p>
                 <p className="text-2xl text-gray-800 tracking-widest">
                   {days.weather[0].main}
