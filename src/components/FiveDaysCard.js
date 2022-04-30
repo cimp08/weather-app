@@ -1,6 +1,6 @@
 import React from "react";
 
-const FiveDaysCard = ({ forecast }) => {
+const FiveDaysCard = ({ forecast, convert }) => {
   const formattedList = forecast.list.reduce((acc, curr) => {
     const dateTime = new Date(curr.dt * 1000);
     const day = dateTime.getDate();
@@ -10,7 +10,7 @@ const FiveDaysCard = ({ forecast }) => {
     if (
       /* !acc.find((d) => d?.day === day && d?.time) && */
       day !== today.getDate() &&
-      curr.dt_txt.includes("12:00:00")
+      curr.dt_txt.includes("09:00:00")
     ) {
       const newDay = {
         ...curr,
@@ -33,7 +33,9 @@ const FiveDaysCard = ({ forecast }) => {
           <li className="p-4 flex items-center justify-center bg-gray-200 rounded-lg my-auto mr-3">
             <div className="my-auto">
               <p className="font-bold text-3x1 text-pink-600 mb-2">
-                {Math.round(days.main.temp)}&deg;C
+                {convert
+                  ? `${Math.round(days.main.temp)} °C`
+                  : `${Math.round(days.main.temp * 2 + 30)} °F`}
               </p>
               <p className="text-2xl text-gray-800 tracking-widest">
                 {days.weather[0].main}
