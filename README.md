@@ -4,13 +4,13 @@
 
 ### Get started:
 
-- Clone repository down with "git clone git@github.com:cimp08/weather-app.git".
+- Clone the project in your local folder.
 
 Edit `.env` file and insert:
 
-- REACT_APP_WEATHER_API_KEY = YOUR API KEY HERE
-- REACT_APP_WEATHER_URL = https://api.openweathermap.org/data/2.5/forecast?
-- REACT_APP_WEATHER_ICON_URL = http://openweathermap.org/img/wn/
+- `REACT_APP_WEATHER_API_KEY = YOUR API KEY HERE`
+- `REACT_APP_WEATHER_URL = https://api.openweathermap.org/data/2.5/forecast?`
+- `REACT_APP_WEATHER_ICON_URL = http://openweathermap.org/img/wn/`
 
 Then save.
 
