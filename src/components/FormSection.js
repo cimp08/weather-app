@@ -4,7 +4,7 @@ const FormSection = (props) => {
   return (
     <div className="form-container">
       <div className="flex items-center justify-center">
-        <h3 className="my-auto mr-auto text-xl text-pink-800 font-bold shadow-md py-1 px-3 rounded-md bg-white bg-opacity-30 uppercase">
+        <h3 className="my-auto mr-auto text-sm md:text-xl text-pink-800 font-bold shadow-md py-1 px-3 rounded-md bg-white bg-opacity-30 uppercase">
           Forecast
         </h3>
         <div className="flex p-2 text.gray-100 bg-gray-200 bg-opacity-30 rounded.lg">
