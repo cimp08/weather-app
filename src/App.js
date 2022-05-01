@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./App.css";
 import DetailCard from "./components/DetailCard";
-import SummaryCard from "./components/SummaryCard";
+import HourlyCard from "./components/HourlyCard";
 import FiveDaysCard from "./components/FiveDaysCard";
+import FormSection from "./components/FormSection";
 
 function App() {
   const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -71,52 +72,13 @@ function App() {
     <div className="flex items-center justify-center h-screen py-10">
       <div className="flex flex-col lg:flex-row w-3/4 w-4/4 min-h-full rounded-3xl shadow-lg m-auto bg-gray-100">
         {/* FORM SECTION */}
-        <div className="form-container">
-          <div className="flex items-center justify-center">
-            <h3 className="my-auto mr-auto text-xl text-yellow-300 font-bold shadow-md py-1 px-3 rounded-md bg-white bg-opacity-30">
-              Forecast
-            </h3>
-            <div className="flex p-2 text.gray-100 bg-gray-200 bg-opacity-30 rounded.lg">
-              <i className="fa fa-map my-auto" aria-hidden="true"></i>
-              <div className="text-right">
-                <p className="font-semibold text-sm ml-2">{city}</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col items-center justify-center h-full">
-            <h1 className="weatherfy mt-10 lg:mt-0 text-white text-xl uppercase">
-              Welcome To Weatherfy
-            </h1>
-            <hr className="h-0.5 bg-white w-1/4 rounded-full my-5" />
-            <form
-              noValidate
-              onSubmit={handleSubmit}
-              className="flex justify-center w-full"
-            >
-              <input
-                type="text"
-                placeholder="Enter City"
-                onChange={handleChange}
-                required
-                className="search-input relative rounded-xl py-2 px-3 w-2/3 bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
-              />
-              <button type="submit" className="z-10">
-                <i
-                  className="fa fa-search text-white -ml-10 border-l my-auto z-10 cursor-pointer p-3"
-                  aria-hidden="true"
-                  type="submit"
-                ></i>
-              </button>
-              <i
-                className="fa fa-map-marker-alt my-auto cursor-pointer p-3 text-white"
-                aria-hidden="true"
-                onClick={() =>
-                  navigator.geolocation.getCurrentPosition(myLocationOnSuccess)
-                }
-              ></i>
-            </form>
-          </div>
-        </div>
+        <FormSection
+          city={city}
+          handleSubmit={handleSubmit}
+          handleChange={handleChange}
+          myLocationOnSuccess={myLocationOnSuccess}
+        />
+
         {/* CARD SECTION */}
         <div className="lg:w-2/4 px-5">
           <div className="flex flex-col my-10">
@@ -134,11 +96,7 @@ function App() {
                   handleConvert={() => handleConvert()}
                   convert={convert}
                 />
-
-                <h1 className="text-3xl text-gray-600 mb-4 mt-10">Today</h1>
-                <SummaryCard today={weatherData} convert={convert} />
-
-                <h1 className="text-3xl text-gray-600 mb-4 mt-10">Forecast</h1>
+                <HourlyCard today={weatherData} convert={convert} />
                 <FiveDaysCard forecast={weatherData} convert={convert} />
               </>
             )}
