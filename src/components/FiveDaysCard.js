@@ -22,7 +22,7 @@ const FiveDaysCard = ({ forecast, convert }) => {
   return (
     <>
       <h1 className="text-3xl text-gray-600 mb-4 mt-10">Forecast</h1>
-      <div class="overflow-x-auto">
+      <div className="overflow-x-auto">
         <ul className="flex flex-row w-max mb-2">
           {formattedList.map((days, index) => (
             <li

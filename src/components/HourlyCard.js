@@ -15,7 +15,7 @@ const HourlyCard = ({ today, convert }) => {
   return (
     <>
       <h1 className="text-3xl text-gray-600 mb-4 mt-10">Today</h1>
-      <div class="overflow-x-auto ...">
+      <div className="overflow-x-auto">
         <ul className="flex flex-row w-max mb-2">
           {onlyToday.map((days, index) => (
             <li
