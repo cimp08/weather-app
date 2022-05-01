@@ -10,6 +10,7 @@ const HourlyCard = ({ today, convert }) => {
     if (day === today.getDate()) {
       return item;
     }
+    return null;
   });
 
   return (
@@ -31,6 +32,7 @@ const HourlyCard = ({ today, convert }) => {
                 <p className="text-2xl text-gray-800 tracking-widest">
                   {days.weather[0].main}
                   <img
+                    alt="weather icon"
                     src={`${
                       process.env.REACT_APP_WEATHER_ICON_URL +
                       days.weather[0]["icon"]

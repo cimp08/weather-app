@@ -35,7 +35,11 @@ const DetailCard = ({ weatherIcon, data, handleConvert, convert }) => {
           <p className="font-bold text-5xl text-pink-800 mb-2">{unit}</p>
           <p className="main-img text-4xl text-gray-800 tracking-widest">
             {weather[0].main}
-            <img className="w-1/4 inline" src={weatherIcon} />
+            <img
+              alt="weather icon"
+              className="w-1/4 inline"
+              src={weatherIcon}
+            />
           </p>
           <p className="text-gray-400 text-xs uppercase tracking-widest">
             {weather[0].description}
