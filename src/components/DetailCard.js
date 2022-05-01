@@ -18,9 +18,9 @@ const DetailCard = ({ weatherIcon, data, handleConvert, convert }) => {
   return (
     <>
       <div className="flex justify-end">
-        <p className="text-xl mr-2">Change to:</p>
+        <p className="text-md md:text-xl mr-2">Change to:</p>
         <button
-          className="text-pink-800 text-xl font bold"
+          className="text-pink-800 text-md md:text-xl font bold"
           onClick={handleConvert}
         >
           {oppositeUnit}
