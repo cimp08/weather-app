@@ -34,6 +34,10 @@ h1 {
   @apply lg:w-2/4 p-5 rounded-3xl;
 }
 
+.search-input {
+  width: 300px;
+}
+
 @media screen and (max-width: 640px) {
   .detailcard {
     display: flex;

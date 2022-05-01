@@ -10,7 +10,7 @@ const FormSection = (props) => {
         <div className="flex p-2 text.gray-100 bg-gray-200 bg-opacity-30 rounded.lg">
           <i className="fa fa-map my-auto" aria-hidden="true"></i>
           <div className="text-right">
-            <p className="font-semibold text-sm ml-2 text-pink-800 uppercase">
+            <p className="font-semibold text-sm ml-2 text-pink-800">
               {props.city}
             </p>
           </div>
@@ -21,27 +21,26 @@ const FormSection = (props) => {
           Welcome To Weatherfy
         </h1>
         <hr className="h-0.5 bg-white w-1/4 rounded-full my-5" />
+
         <form
           noValidate
           onSubmit={props.handleSubmit}
           className="flex justify-center w-full"
         >
-          <input
-            type="text"
-            placeholder="Enter City"
-            onChange={props.handleChange}
-            required
-            className="search-input relative rounded-xl py-2 px-3 w-2/3 bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
-          />
-          <button type="submit" className="z-10">
-            <i
-              className="fa fa-search text-white -ml-10 border-l my-auto z-10 cursor-pointer p-3"
-              aria-hidden="true"
-              type="submit"
-            ></i>
-          </button>
+          <div className="relative">
+            <input
+              type="text"
+              className="search-input search h-14 pr-1 pl-5 rounded-xl z-0 focus:shadow focus:outline-none bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
+              placeholder="Search City..."
+              onChange={props.handleChange}
+            />
+            <button className="absolute top-4 right-3" type="submit">
+              <i className="fa fa-search text-white z-20 hover:text-gray-500 cursor-pointer"></i>
+            </button>
+          </div>
+
           <i
-            className="fa fa-map-marker-alt my-auto cursor-pointer p-3 text-white"
+            className="fa fa-map-marker-alt my-auto cursor-pointer p-3 text-white ml-2"
             aria-hidden="true"
             onClick={() =>
               navigator.geolocation.getCurrentPosition(
@@ -56,3 +55,18 @@ const FormSection = (props) => {
 };
 
 export default FormSection;
+
+/* <input
+            type="text"
+            placeholder="Enter City"
+            onChange={props.handleChange}
+            required
+            className="search-input relative rounded-xl py-2 px-3 w-2/3 bg-gray-300 bg-opacity-60 text-white placeholder-gray-200"
+          />
+          <button type="submit" className="z-10">
+            <i
+              className="fa fa-search text-white -ml-10 border-l my-auto cursor-pointer p-3 z-10"
+              aria-hidden="true"
+              type="submit"
+            ></i>
+          </button> */
